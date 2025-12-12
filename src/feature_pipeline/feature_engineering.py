@@ -81,11 +81,11 @@ def run_feature_engineering(
 
     # Defaults for inputs
     if in_train_path is None:
-        in_train_path = PROCESSED_DIR / "cleaning_train.csv"
+        in_train_path = PROCESSED_DIR / "clean_train.csv"
     if in_eval_path is None:
-        in_eval_path = PROCESSED_DIR / "cleaning_eval.csv"
+        in_eval_path = PROCESSED_DIR / "clean_eval.csv"
     if in_holdout_path is None:
-        in_holdout_path = PROCESSED_DIR / "cleaning_holdout.csv"
+        in_holdout_path = PROCESSED_DIR / "clean_holdout.csv"
 
     train_df = pd.read_csv(in_train_path)
     eval_df = pd.read_csv(in_eval_path)

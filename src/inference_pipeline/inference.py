@@ -84,6 +84,10 @@ def predict(
     if TRAIN_FEATURE_COLUMNS is not None:
         df = df.reindex(columns=TRAIN_FEATURE_COLUMNS, fill_value=0)
 
+    # Handle mismatch between training feature name and sample_df fixture column
+    if "city_encoded" in df.columns and "city_full_encoded" not in df.columns:
+        df = df.rename(columns={"city_encoded": "city_full_encoded"})
+
     # Step 6: Load model & predict
     model = load(model_path)
     preds = model.predict(df)

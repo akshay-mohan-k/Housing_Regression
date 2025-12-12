@@ -58,7 +58,7 @@ def test_drop_duplicates_removes_dupes():
 
 def test_clean_and_merge_skips_when_city_missing():
     df = pd.DataFrame({"date": ["2020-01-01"], "price": [100]})
-    result = clean_and_merge(df, metros_path=None)  # should skip gracefully
+    result = clean_and_merge(df)  # should skip gracefully
     assert "date" in result.columns and "price" in result.columns
     print("✅ Clean-and-merge (no city_full) passed")
 
@@ -129,12 +129,12 @@ def test_full_pipeline_integration(tmp_path):
     train.to_csv(tmp_path / "train.csv", index=False)
     eval.to_csv(tmp_path / "eval.csv", index=False)
 
-    preprocess_split("train", raw_dir=tmp_path, processed_dir=processed_dir, metros_path=None)
-    preprocess_split("eval", raw_dir=tmp_path, processed_dir=processed_dir, metros_path=None)
+    preprocess_split("train", raw_dir=tmp_path, processed_dir=processed_dir)
+    preprocess_split("eval", raw_dir=tmp_path, processed_dir=processed_dir)
 
     out_train, out_eval, out_holdout, freq_map, te = run_feature_engineering(
-        in_train_path=processed_dir / "cleaning_train.csv",
-        in_eval_path=processed_dir / "cleaning_eval.csv",
+        in_train_path=processed_dir / "clean_train.csv",
+        in_eval_path=processed_dir / "clean_eval.csv",
         output_dir=processed_dir,
     )
 

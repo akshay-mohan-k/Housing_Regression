@@ -59,7 +59,7 @@ def test_tune_saves_best_model(tmp_path):
         model_output=model_out,
         n_trials=2,
         sample_frac=0.02,
-        tracking_uri=str(tracking_dir),
+        tracking_uri=tracking_dir.as_uri(),
         experiment_name="test_xgb_optuna",
     )
     assert model_out.exists()
